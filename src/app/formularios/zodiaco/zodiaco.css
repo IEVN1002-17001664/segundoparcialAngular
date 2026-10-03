@@ -1,0 +1,67 @@
+.contenedor {
+    width: 750px;
+    margin: 40px auto;
+    display: flex;
+    border: 1px solid #999;
+    padding: 25px;
+}
+
+.formulario {
+    width: 50%;
+    padding: 15px;
+    border-right: 4px solid black;
+}
+
+.resultado {
+    width: 50%;
+    text-align: center;
+    padding: 15px;
+}
+
+fieldset {
+    width: 270px;
+}
+
+fieldset input[type="text"] {
+    width: 180px;
+}
+
+.fecha-titulo {
+    text-align: center;
+}
+
+.fecha {
+    display: flex;
+    gap: 5px;
+}
+
+.fecha div {
+    text-align: center;
+}
+
+.fecha input {
+    width: 70px !important;
+}
+
+button {
+    width: 170px;
+    height: 38px;
+    margin: 20px 25px;
+    font-weight: bold;
+}
+
+.resultado h2 {
+    margin: 25px 0;
+}
+
+.signo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.signo img {
+    width: 80px;
+    height: 80px;
+}

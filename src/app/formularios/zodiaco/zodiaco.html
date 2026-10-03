@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zodiaco</title>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <div class="formulario">
+
+            <fieldset>
+
+                <legend>Datos Personales</legend>
+
+                <label>Nombre:</label>
+                <input
+                    [(ngModel)]="nombre"
+                    name="nombre"
+                    type="text"
+                    placeholder="Ingrese su nombre">
+
+                <br>
+
+                <label>Apaterno:</label>
+                <input
+                    [(ngModel)]="paterno"
+                    name="paterno"
+                    type="text"
+                    placeholder="Ingrese apellido paterno">
+
+                <br>
+
+                <label>Amaterno:</label>
+                <input
+                    [(ngModel)]="materno"
+                    name="materno"
+                    type="text"
+                    placeholder="Ingrese apellido materno">
+
+                <br><br>
+
+                <div class="fecha-titulo">
+                    Fecha de nacimiento
+                </div>
+
+                <div class="fecha">
+
+                    <div>
+                        <label>Día</label>
+
+                        <input
+                            [(ngModel)]="dia"
+                            name="dia"
+                            type="text"
+                            placeholder="Día">
+                    </div>
+
+
+                    <div>
+                        <label>Mes</label>
+
+                        <input
+                            [(ngModel)]="mes"
+                            name="mes"
+                            type="text"
+                            placeholder="Mes">
+                    </div>
+
+
+                    <div>
+                        <label>Año</label>
+
+                        <input
+                            [(ngModel)]="anio"
+                            name="anio"
+                            type="text"
+                            placeholder="Año">
+                    </div>
+
+                </div>
+
+                <br>
+
+                <label>sexo</label>
+
+                <br>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="sexo"
+                        value="Masculino"
+                        [(ngModel)]="sexo">
+
+                    Masculino
+                </label>
+
+                <br>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="sexo"
+                        value="Femenino"
+                        [(ngModel)]="sexo">
+
+                    Femenino
+                </label>
+
+            </fieldset>
+
+           
+
+             <button
+                (click)="imprimir()"
+                type="button">
+
+                Imprimir
+
+            </button>
+
+
+
+            <button
+                (click)="limpiar()"
+                type="button">
+
+                Limpiar
+
+            </button>
+
+
+       
+
+        </div>
+
+
+        <div class="resultado">
+
+            <h2>
+                Hola <i>{{nombreCompleto}}</i>
+            </h2>
+
+            <h2>
+                Tienes {{edad}} años
+            </h2>
+
+            <h2>
+                tu signo zodiacal
+            </h2>
+
+            <div class="signo">
+
+                <h2>
+                    Es {{signo}}
+                </h2>
+
+                <img
+                    *ngIf="imagen"
+                    [src]="imagen">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
