@@ -1,19 +1,10 @@
 
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { IAlumnos } from '../alumnos';
  
-export interface IAlumnos {
-
-  matricula: string;
-
-  nombre: string;
-
-  correo: string;
-
-  materia: string;
-
-}
  
 @Component({
 
@@ -21,7 +12,7 @@ export interface IAlumnos {
 
   standalone: true,
 
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
 
   templateUrl: './lista-alumnos.html'
 
@@ -190,6 +181,16 @@ export class ListaAlumnos implements OnInit {
       materia: ''
 
     }
+
+    this.formulario.patchValue({
+
+      matricula:this.nuevoAlumno.matricula,
+      nombre:this.nuevoAlumno.nombre,
+      correo:this.nuevoAlumno.correo,
+      materia:this.nuevoAlumno.materia
+    }
+
+    )
 
     this.indiceEdicion=-1
 

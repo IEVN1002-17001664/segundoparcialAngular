@@ -1,0 +1,234 @@
+
+<div class="max-w-6xl mx-auto p-6">
+
+  <!-- Encabezado -->
+  <div class="text-center mb-8">
+    <h1 class="text-4xl font-bold text-blue-800">Cinépolis</h1>
+    <p class="text-black-600 mt-2">Administración de registros</p>
+    <div class="w-24 h-1 bg-blue-700 mx-auto mt-4 rounded-full"></div>
+  </div>
+
+  <!-- Formulario de edición -->
+  <div
+    *ngIf="indiceEdicion !== -1"
+    class="border-2 border-blue-700 rounded-lg p-6 mb-8 shadow-md"
+  >
+    <h2 class="text-2xl font-bold text-blue-700 mb-5">
+      Editar registro
+    </h2>
+
+    <form [formGroup]="formulario">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+        <div>
+          <label class="block font-medium text-gray-700 mb-2">
+            Nombre del comprador
+          </label>
+          <input
+            type="text"
+            formControlName="nombre"
+            placeholder="Ingresa el nombre"
+            class="border border-gray-300 rounded-lg p-3 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+          />
+        </div>
+
+        <div>
+          <label class="block font-medium text-gray-700 mb-2">
+            Cantidad de compradores
+          </label>
+          <input
+            type="number"
+            formControlName="compradores"
+            min="1"
+            class="border border-gray-300 rounded-lg p-3 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+          />
+        </div>
+
+        <div>
+          <label class="block font-medium text-gray-700 mb-2">
+            Cantidad de boletos
+          </label>
+          <input
+            type="number"
+            formControlName="boletos"
+            min="1"
+            class="border border-gray-300 rounded-lg p-3 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+          />
+        </div>
+
+        <div>
+          <label class="block font-medium text-gray-700 mb-2">
+            ¿Tiene tarjeta CINÉCO?
+          </label>
+
+          <div class="flex items-center gap-6 mt-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                formControlName="tarjeta"
+                value="Si"
+                class="w-4 h-4 text-blue-700"
+              />
+              Sí
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                formControlName="tarjeta"
+                value="No"
+                class="w-4 h-4 text-blue-700"
+              />
+              No
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-4 mt-6">
+        <button
+          type="button"
+          (click)="guardarCambios()"
+          class="bg-blue-700 hover:bg-blue-800 text-white font-medium rounded-lg px-6 py-3 transition"
+        >
+          Guardar cambios
+        </button>
+
+        <button
+          type="button"
+          (click)="cancelarEdicion()"
+          class="bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-lg px-6 py-3 transition"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Listado de registros -->
+  <div class="border-2 border-blue-700 rounded-lg p-5 shadow-md">
+
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-5">
+      <div>
+        <h2 class="text-2xl font-bold text-blue-700">
+          Registros de compras
+        </h2>
+        <p class="text-gray-600 mt-1">
+          Consulta y administra las compras realizadas.
+        </p>
+      </div>
+
+      <span class="bg-blue-100 text-blue-800 font-semibold px-4 py-2 rounded-lg self-start">
+        Total: {{ registros.length }}
+      </span>
+    </div>
+
+    <!-- Cuando no hay registros -->
+    <div
+      *ngIf="registros.length === 0"
+      class="bg-blue-50 border border-blue-200 rounded-lg p-8 text-center"
+    >
+      <h3 class="text-xl font-bold text-blue-800 mb-2">
+        No hay registros disponibles
+      </h3>
+      <p class="text-gray-600">
+        Cuando proceses una compra en Cinépolis, aparecerá aquí.
+      </p>
+    </div>
+
+    <!-- Tabla -->
+    <div
+      *ngIf="registros.length > 0"
+      class="overflow-x-auto rounded-lg border border-gray-200"
+    >
+      <table class="w-full text-sm text-left text-gray-700">
+
+        <thead class="text-xs text-white uppercase bg-blue-700">
+          <tr>
+            <th class="px-5 py-4">Nombre</th>
+            <th class="px-5 py-4 text-center">Compradores</th>
+            <th class="px-5 py-4 text-center">Boletos</th>
+            <th class="px-5 py-4 text-center">Tarjeta CINÉCO</th>
+            <th class="px-5 py-4 text-right">Total pagado</th>
+            <th class="px-5 py-4 text-center">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let registro of registros; let i = index"
+            class="bg-white border-b hover:bg-blue-50 transition"
+          >
+            <td class="px-5 py-4 font-semibold text-gray-900">
+              {{ registro.nombre }}
+            </td>
+
+            <td class="px-5 py-4 text-center">
+              {{ registro.compradores }}
+            </td>
+
+            <td class="px-5 py-4 text-center">
+              {{ registro.boletos }}
+            </td>
+
+            <td class="px-5 py-4 text-center">
+              <span
+                [ngClass]="registro.tarjeta === 'Si'
+                  ? 'bg-green-100 text-green-800'
+                  : 'bg-gray-100 text-gray-700'"
+                class="font-medium px-3 py-1 rounded-full"
+              >
+                {{ registro.tarjeta }}
+              </span>
+            </td>
+
+            <td class="px-5 py-4 text-right font-bold text-blue-800">
+              {{ registro.valorPagar | currency:'MXN':'symbol':'1.2-2' }}
+            </td>
+
+            <td class="px-5 py-4">
+              <div class="flex flex-wrap justify-center gap-2">
+                <button
+                  type="button"
+                  (click)="editarRegistro(i)"
+                  class="bg-blue-700 hover:bg-blue-800 text-white rounded-lg px-3 py-2 transition"
+                >
+                  Editar
+                </button>
+
+                <button
+                  type="button"
+                  (click)="eliminarRegistro(i)"
+                  class="bg-red-600 hover:bg-red-700 text-white rounded-lg px-3 py-2 transition"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+
+  <!-- Acciones generales -->
+  <div class="border-2 border-blue-700 rounded-lg p-5 mt-6">
+    <h2 class="text-2xl font-bold text-blue-700 mb-5">
+      Acciones
+    </h2>
+
+    <div class="flex justify-center">
+      <button
+        type="button"
+        (click)="regresar()"
+        class="bg-blue-900 hover:bg-gray-700 text-white font-medium rounded-lg px-6 py-3 transition"
+      >
+        Regresar a Cinépolis
+      </button>
+    </div>
+  </div>
+
+</div>
+```

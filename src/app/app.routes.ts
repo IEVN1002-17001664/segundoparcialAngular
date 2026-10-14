@@ -1,5 +1,6 @@
+
 import { Routes } from "@angular/router";
- 
+
 export const routes: Routes = [
   {
     path: "formularios",
@@ -7,17 +8,21 @@ export const routes: Routes = [
       {
         path: "usuarios",
         loadComponent: () =>
-          import("./formularios/usuario/usuario").then((c) => c.Usuario),
+          import("./formularios/usuario/usuario").then(
+            (c) => c.Usuario,
+          ),
       },
- 
+
       {
         path: "zodiaco",
         loadComponent: () =>
-          import("./formularios/zodiaco/zodiaco").then((c) => c.Zodiaco),
+          import("./formularios/zodiaco/zodiaco").then(
+            (c) => c.Zodiaco,
+          ),
       },
     ],
   },
- 
+
   {
     path: "escuela",
     children: [
@@ -28,30 +33,33 @@ export const routes: Routes = [
             (c) => c.ListaAlumnos,
           ),
       },
-    
-  
 
-    
-    
       {
         path: "Cinepolis",
         loadComponent: () =>
           import("./escuela/cinepolis/cinepolis").then(
             (c) => c.Cinepolis,
           ),
+      },
+
+      {
+        path: "VerRegistros",
+        loadComponent: () =>
+          import("./escuela/ver-registros/ver-registros").then(
+            (c) => c.VerRegistros,
+          ),
+      },
+    ],
   },
-],
-  },
- 
+
   {
     path: "",
     redirectTo: "admin",
     pathMatch: "full",
   },
- 
+
   {
     path: "**",
     redirectTo: "admin",
   },
 ];
- 
